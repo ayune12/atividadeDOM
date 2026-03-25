@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Correção de Médias</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    #resultado {
+      margin-top: 15px;
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 5px;
+      width: fit-content;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Sistema de Médias</h2>
+
+  <form id="formMedia">
+    <input type="number" id="nota1" placeholder="Nota 1" step="0.1" required>
+    <input type="number" id="nota2" placeholder="Nota 2" step="0.1" required>
+    <button type="submit">Calcular Média</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script>
+    const form = document.getElementById("formMedia");
+    const nota1Input = document.getElementById("nota1");
+    const nota2Input = document.getElementById("nota2");
+    const resultado = document.getElementById("resultado");
+
+    function calcularMedia(n1, n2) {
+      const media = (n1 + n2) / 2;
+
+      let status = "";
+      let cor = "";
+
+      if (media >= 7) {
+        status = "Aprovado";
+        cor = "green";
+      } else if (media >= 5) {
+        status = "Recuperação";
+        cor = "orange";
+      } else {
+        status = "Reprovado";
+        cor = "red";
+      }
+
+      return { media, status, cor };
+    }
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const nota1 = Number(nota1Input.value);
+      const nota2 = Number(nota2Input.value);
+
+      if (nota1 < 0 || nota2 < 0 || nota1 > 10 || nota2 > 10) {
+        resultado.textContent = "Notas devem estar entre 0 e 10.";
+        resultado.style.backgroundColor = "lightgray";
+        resultado.style.color = "black";
+        return;
+      }
+
+      const resultadoCalc = calcularMedia(nota1, nota2);
+
+      resultado.textContent = 
+        `Média: ${resultadoCalc.media.toFixed(1)} - ${resultadoCalc.status}`;
+
+      resultado.style.backgroundColor = resultadoCalc.cor;
+      resultado.style.color = "white";
+    });
+  </script>
+
+</body>
+</html>

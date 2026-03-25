@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora da Oficina</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    #resultado {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Calculadora de Orçamento</h2>
+
+  <form id="formCalc">
+    <input type="number" id="valor1" placeholder="Valor 1" required>
+    
+    <select id="operacao">
+      <option value="soma">+</option>
+      <option value="subtracao">-</option>
+      <option value="multiplicacao">*</option>
+      <option value="divisao">/</option>
+    </select>
+
+    <input type="number" id="valor2" placeholder="Valor 2" required>
+
+    <button type="submit">Calcular</button>
+  </form>
+
+  <p id="resultado"></p>
+
+  <script>
+    const form = document.getElementById("formCalc");
+    const valor1Input = document.getElementById("valor1");
+    const valor2Input = document.getElementById("valor2");
+    const operacaoSelect = document.getElementById("operacao");
+    const resultado = document.getElementById("resultado");
+
+    // Função de cálculo
+    function calcular(v1, v2, operacao) {
+      let res;
+
+      if (operacao === "soma") {
+        res = v1 + v2;
+      } else if (operacao === "subtracao") {
+        res = v1 - v2;
+      } else if (operacao === "multiplicacao") {
+        res = v1 * v2;
+      } else if (operacao === "divisao") {
+        if (v2 === 0) {
+          return "Erro: divisão por zero";
+        }
+        res = v1 / v2;
+      }
+
+      return res;
+    }
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const valor1 = Number(valor1Input.value);
+      const valor2 = Number(valor2Input.value);
+      const operacao = operacaoSelect.value;
+
+      const resultadoCalc = calcular(valor1, valor2, operacao);
+
+      resultado.textContent = "Resultado: " + resultadoCalc;
+    });
+  </script>
+
+</body>
+</html>

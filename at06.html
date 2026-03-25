@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Missões</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    ul {
+      margin-top: 15px;
+      padding: 0;
+    }
+
+    li {
+      list-style: none;
+      padding: 8px;
+      margin-bottom: 5px;
+      background: #eee;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .concluida {
+      text-decoration: line-through;
+      background: #c8f7c5;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Missões</h2>
+
+  <input type="text" id="missaoInput" placeholder="Digite uma missão">
+  <button id="btnAdicionar">Adicionar</button>
+
+  <ul id="lista"></ul>
+
+  <script>
+    const input = document.getElementById("missaoInput");
+    const botao = document.getElementById("btnAdicionar");
+    const lista = document.getElementById("lista");
+
+    botao.addEventListener("click", function() {
+      const texto = input.value.trim();
+
+      if (texto === "") return;
+
+      const item = document.createElement("li");
+      item.textContent = texto;
+
+      item.addEventListener("click", function() {
+        item.classList.toggle("concluida");
+      });
+
+      lista.appendChild(item);
+      input.value = "";
+    });
+  </script>
+
+</body>
+</html>

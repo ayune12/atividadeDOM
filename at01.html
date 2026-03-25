@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botão</title>
+</head>
+<body>
+    <h1>Aperte o Botão</h1>
+    <p id="contador">Total de cliques:</p>
+    <button id="botaoGostei"  class="btn">GOSTEI!</button>
+
+    <script>
+    let totalCliques = 0;
+
+    const botao = document.getElementById("botaoGostei");
+    const textoContador = document.getElementById("contador");
+
+    botao.addEventListener("click", function() {
+
+      totalCliques = totalCliques + 1;
+
+      textoContador.textContent = "Total de cliques: " + totalCliques;
+
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistema de Votação</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    button {
+      margin: 5px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    .resultado {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Votação - Representante da Turma</h2>
+
+  <button onclick="votar('A')">Candidato A</button>
+  <button onclick="votar('B')">Candidato B</button>
+  <button onclick="votar('C')">Candidato C</button>
+
+  <p id="votosA">A: 0 votos</p>
+  <p id="votosB">B: 0 votos</p>
+  <p id="votosC">C: 0 votos</p>
+
+  <button onclick="mostrarResultado()">Ver Resultado</button>
+
+  <p id="resultado" class="resultado"></p>
+
+  <script>
+    let votosA = 0;
+    let votosB = 0;
+    let votosC = 0;
+
+    function votar(candidato) {
+      if (candidato === 'A') {
+        votosA++;
+      } else if (candidato === 'B') {
+        votosB++;
+      } else if (candidato === 'C') {
+        votosC++;
+      }
+
+      atualizarTela();
+    }
+
+    function atualizarTela() {
+      document.getElementById("votosA").textContent = "A: " + votosA + " votos";
+      document.getElementById("votosB").textContent = "B: " + votosB + " votos";
+      document.getElementById("votosC").textContent = "C: " + votosC + " votos";
+    }
+
+    function mostrarResultado() {
+      let resultado = "";
+
+      if (votosA > votosB && votosA > votosC) {
+        resultado = "Candidato A está ganhando!";
+      } else if (votosB > votosA && votosB > votosC) {
+        resultado = "Candidato B está ganhando!";
+      } else if (votosC > votosA && votosC > votosB) {
+        resultado = "Candidato C está ganhando!";
+      } else {
+        resultado = "Empate!";
+      }
+
+      document.getElementById("resultado").textContent = resultado;
+    }
+  </script>
+
+</body>
+</html>

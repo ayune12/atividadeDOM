@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Jogo do Número</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    #mensagem {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Adivinhe o Número (1 a 20)</h2>
+
+  <input type="number" id="palpite" min="1" max="20">
+  <button id="btnTentar">Tentar</button>
+  <button id="btnReiniciar">Reiniciar</button>
+
+  <p id="mensagem"></p>
+  <p id="tentativas"></p>
+
+  <script>
+    const input = document.getElementById("palpite");
+    const btnTentar = document.getElementById("btnTentar");
+    const btnReiniciar = document.getElementById("btnReiniciar");
+    const mensagem = document.getElementById("mensagem");
+    const tentativasTexto = document.getElementById("tentativas");
+
+    let numeroSecreto;
+    let tentativas;
+
+    function iniciarJogo() {
+      numeroSecreto = Math.floor(Math.random() * 20) + 1;
+      tentativas = 0;
+      mensagem.textContent = "";
+      tentativasTexto.textContent = "";
+      input.value = "";
+    }
+
+    function verificarPalpite() {
+      const palpite = Number(input.value);
+      tentativas++;
+
+      if (palpite > numeroSecreto) {
+        mensagem.textContent = "Muito alto";
+      } else if (palpite < numeroSecreto) {
+        mensagem.textContent = "Muito baixo";
+      } else {
+        mensagem.textContent = "Acertou!";
+      }
+
+      tentativasTexto.textContent = "Tentativas: " + tentativas;
+    }
+
+    btnTentar.addEventListener("click", verificarPalpite);
+
+    btnReiniciar.addEventListener("click", function() {
+      for (let i = 0; i < 1; i++) {
+        iniciarJogo();
+      }
+    });
+
+    iniciarJogo();
+  </script>
+
+</body>
+</html>
